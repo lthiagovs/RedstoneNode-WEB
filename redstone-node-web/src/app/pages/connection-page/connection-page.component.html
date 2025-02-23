@@ -1,0 +1,81 @@
+<!-- Search and Action Bar -->
+<div class="action-bar">
+    <div class="search-container">
+      <span class="material-icons search-icon">search</span>
+      <input 
+        type="text" 
+        placeholder="Search connections..." 
+        [(ngModel)]="searchQuery"
+        class="search-input"
+      >
+    </div>
+    <button class="create-btn" (click)="openCreateModal()">
+      <span class="material-icons">add</span>
+      New Connection
+    </button>
+  </div>
+  
+  <!-- Connection Grid -->
+  <div class="connection-grid">
+    @for (connection of connections; track connection.id) {
+      <div class="connection-card">
+        <div class="card-header">
+          <span class="material-icons connection-icon">{{connection.icon}}</span>
+          <div class="status-badge">{{connection.status}}</div>
+        </div>
+        <div class="card-content">
+          <h3>{{connection.name}}</h3>
+          <p class="type">{{connection.type}}</p>
+          <p class="sync-info">
+            <span class="material-icons">sync</span>
+            Last synced: {{connection.lastSync}}
+          </p>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn">
+            <span class="material-icons">settings</span>
+          </button>
+          <button class="action-btn">
+            <span class="material-icons">more_vert</span>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+  
+  <!-- Create Connection Modal -->
+  @if (showModal) {
+    <div class="modal-overlay" (click)="closeModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>Create New Connection</h2>
+          <button class="close-btn" (click)="closeModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Connection Name</label>
+            <input type="text" placeholder="Enter connection name">
+          </div>
+          <div class="form-group">
+            <label>Connection Type</label>
+            <select>
+              <option>Database</option>
+              <option>API</option>
+              <option>File System</option>
+              <option>Cloud Storage</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Connection URL</label>
+            <input type="text" placeholder="Enter connection URL">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-btn" (click)="closeModal()">Cancel</button>
+          <button class="primary-btn">Create Connection</button>
+        </div>
+      </div>
+    </div>
+}

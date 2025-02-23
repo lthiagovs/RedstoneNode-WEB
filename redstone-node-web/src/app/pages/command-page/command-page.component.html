@@ -1,0 +1,38 @@
+<div class="action-bar">
+    <div class="search-container">
+        <span class="search-icon material-icons">search</span>
+        <input type="text" class="search-input" [(ngModel)]="searchQuery" placeholder="Search scripts...">
+    </div>
+    <button class="create-btn" (click)="addBot()">
+        <span class="material-icons">add</span> Add Bot
+    </button>
+</div>
+
+<!-- Lista de Bots -->
+<div class="bot-list">
+    <div class="bot-card" *ngFor="let bot of bots">
+        <h3>{{ bot.name }}</h3>
+        <div class="bot-status">
+            <p><strong>Health:</strong> {{ bot.health }}%</p>
+            <p><strong>Hunger:</strong> {{ bot.hunger }}%</p>
+        </div>
+        <button class="toggle-btn" (click)="toggleBot(bot)">
+            <span class="material-icons">{{ bot.active ? 'toggle_on' : 'toggle_off' }}</span>
+        </button>
+    </div>
+</div>
+
+<!-- Grid de Scripts -->
+<div class="script-grid">
+    <div class="script-card" *ngFor="let script of scripts">
+        <div class="card-header">
+            <h3>{{ script.title }}</h3>
+            <span class="status-badge" [ngClass]="{ 'active': script.running, 'inactive': !script.running }">
+                {{ script.running ? 'Running' : 'Stopped' }}
+            </span>
+        </div>
+        <div class="card-content">
+            <p>{{ script.description }}</p>
+        </div>
+    </div>
+</div>

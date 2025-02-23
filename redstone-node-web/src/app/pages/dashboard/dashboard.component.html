@@ -1,0 +1,42 @@
+<!-- home.component.html -->
+<div class="container">
+    <!-- Header -->
+    <header class="header">
+      <button class="menu-toggle" (click)="toggleMenu()">
+        <span class="material-icons">menu</span>
+      </button>
+      <h1>My Website</h1>
+      <div class="header-actions">
+        <span class="material-icons">notifications</span>
+        <span class="material-icons">account_circle</span>
+      </div>
+    </header>
+  
+    <!-- Main Content Area -->
+    <div class="main">
+      <!-- Side Menu -->
+      <nav class="side-menu">
+        <div class="menu-header">
+          <img src="assets/logo.png" alt="Logo" class="logo">
+        </div>
+        <ul class="menu-items">
+            @for (item of menuItems; track $index) {
+            <li>
+                <span class="material-icons">{{item.icon}}</span>
+                <span class="menu-text">{{item.name}}</span>
+            </li>
+            }
+        </ul>
+      </nav>
+  
+      <!-- Content -->
+      <div class="content">
+        <app-home-page></app-home-page>
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2025 My Website. All rights reserved.</p>
+    </footer>
+  </div>

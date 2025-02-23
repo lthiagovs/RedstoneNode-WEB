@@ -1,0 +1,135 @@
+/* home.component.css */
+:host {
+    display: block;
+    min-height: 100vh;
+}
+  
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 24px;
+    background-color: #2d2d2d;
+    border-bottom: 2px solid #FF3333;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 24px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 24px;
+}
+
+/* Main Content Area */
+.main {
+    display: flex;
+    height: calc(100vh - 128px); /* Subtrai altura do header e footer */
+}
+
+/* Side Menu */
+.side-menu {
+    width: 250px;
+    background-color: #2d2d2d;
+    transition: width 0.3s ease;
+    overflow: hidden; /* Adiciona overflow para evitar que conteúdo vaze ao esconder */
+}
+
+.side-menu.collapsed {
+    width: 0; /* Define a largura como 0 quando o menu está colapsado */
+}
+
+.menu-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    opacity: 1; /* Torna os itens visíveis por padrão */
+    transition: opacity 0.3s ease; /* Transição suave para visibilidade */
+}
+
+.side-menu.collapsed .menu-items {
+    display: none; /* Esconde os itens do menu quando colapsado */
+}
+
+.menu-items li {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    cursor: pointer;
+    color: #b3b3b3;
+}
+
+.menu-items li:hover {
+    background-color: #FF3333;
+    color: white;
+}
+
+.menu-items .material-icons {
+    margin-right: 16px;
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding: 24px;
+    background-color: #1a1a1a;
+    overflow-y: auto;
+}
+
+/* Footer */
+.footer {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d2d2d;
+    border-top: 2px solid #FF3333;
+}
+
+.footer p {
+    margin: 0;
+    color: #b3b3b3;
+}
+
+/* Quando o menu está colapsado */
+.side-menu.collapsed .menu-text {
+    display: none;
+}
+
+.side-menu.collapsed .logo {
+    width: 32px;
+}
