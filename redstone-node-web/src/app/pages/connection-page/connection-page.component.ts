@@ -38,8 +38,10 @@ export class ConnectionPageComponent {
       port:this.newConnectionPort
     }
 
-    await this.http.post("http://localhost:3000/connection/create", newConnection).subscribe((response) => {});
-
+    await this.http.post("http://localhost:3000/connection/create", newConnection).subscribe((response) => {
+      this.connections.push(response as Connection);
+    });
+    this.closeModal();
   }
 
   async getAllConnections(){

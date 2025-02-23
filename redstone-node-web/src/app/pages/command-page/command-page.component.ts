@@ -17,19 +17,14 @@ export class CommandPageComponent {
 
   @Input({required: true})
   targetConnection?:Connection;
+  targetBot:Bot | null = null;
 
   searchQuery = '';
   bots:Bot[] = [];
 
   scripts = [
-    { title: 'Auto Farm', description: 'Farms resources automatically', running: true },
-    { title: 'Guard Duty', description: 'Protects an area from intruders', running: false },
-    { title: 'Resource Collector', description: 'Collects nearby resources', running: true },
-    { title: 'Guard Duty', description: 'Protects an area from intruders', running: false },
-    { title: 'Guard Duty', description: 'Protects an area from intruders', running: false },
-    { title: 'Guard Duty', description: 'Protects an area from intruders', running: false },
-    { title: 'Guard Duty', description: 'Protects an area from intruders', running: false },
-    { title: 'Guard Duty', description: 'Protects an area from intruders', running: false },
+    { title: 'Parar Tudo', description: 'O Bot para todas as suas ações.', action: "http://localhost:3000/actions/stopAll/"},
+    { title: 'Coletar Madeira', description: 'Procura e coleta todo tipo de madeira.', action: "http://localhost:3000/actions/getWood/"},
   ];
 
   async ngOnInit(){
@@ -55,11 +50,30 @@ export class CommandPageComponent {
     script.selected = true;
   }
 
+  handleBotStatus(id:number, event:any){
+    const isChecked = event.target.checked;
+    if(isChecked){
+      this.online(id);
+    }else{
+      this.offline(id);
+    }
+  }
+
+  async executeAction(script: any){
+    await this.http.put(script.action+this.targetBot?.id,null).subscribe((response) => {});
+  }
+
+  handleBot(bot:Bot){
+    this.targetBot = bot;
+  }
+
   //Bot Commands
   async online(id:number){
-    await this.http.get("http://localhost:3000/bot/online/"+id).subscribe((response) => {
-      this.bots = response as Bot[];
-    });
+    await this.http.put("http://localhost:3000/bot/online/"+id,null).subscribe((response) => {});
+  }
+
+  async offline(id:number){
+    await this.http.put("http://localhost:3000/bot/offline/"+id,null).subscribe((response) => {});
   }
 
   async addBot() {
@@ -82,5 +96,6 @@ export class CommandPageComponent {
     });
     
   }
+
 
 }

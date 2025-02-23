@@ -68,25 +68,82 @@ hr{
 .bot-card {
     flex: 0 0 150px;
     position: relative;
-    background: #1e1e1e;
-    border-radius: 12px;
-    padding: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background: #2c2c2c; /* Um tom mais suave de cinza escuro */
+    border-radius: 15px; /* Bordas mais suaves */
+    padding: 10px; /* Maior espaçamento interno */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombras mais suaves e mais largas */
     border: 1px solid #333;
     transition: all 0.3s ease;
+    overflow: hidden; /* Garante que os conteúdos não ultrapassem os limites do card */
+}
+
+.bot-icon-container{
+    display: flex;
+    justify-content: center;
+}
+
+.bot-icon{
+    font-size: 3rem;
 }
 
 .bot-card:hover {
     cursor: pointer;
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
-    border-color: #4CAF50;
+    transform: translateY(-8px); /* Animação mais fluida */
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25); /* Sombra mais profunda ao passar o mouse */
+    border-color: #4CAF50; /* Cor de borda ao passar o mouse */
 }
 
-.bot-list > * {
-    float: left;
-    white-space: normal;
+.bot-card-active {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
+    border-color: #4CAF50; /* Cor de borda ativa */
 }
+
+.bot-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Bordas arredondadas para a imagem */
+    object-fit: cover; /* Faz com que a imagem ocupe todo o espaço do container sem distorção */
+}
+
+.bot-info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+h4 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.status-switch {
+    margin: 10px 0;
+}
+
+.bar {
+    height: 6px;
+    border-radius: 5px;
+    margin: 5px 0;
+    background: #ddd; /* Cor de fundo neutra para as barras */
+}
+
+.fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.health-bar .fill {
+    background: #4CAF50; /* Cor padrão de saúde */
+}
+
+.hunger-bar .fill {
+    background: #FFD700; /* Cor padrão de fome */
+}
+
+
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -196,6 +253,7 @@ input:checked + .slider:before {
 }
 
 .script-card:hover {
+    cursor: pointer;
     transform: scale(1.05);
 }
 

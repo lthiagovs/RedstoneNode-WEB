@@ -5,45 +5,49 @@
         <input type="text" class="search-input" [(ngModel)]="searchQuery" placeholder="Search scripts...">
     </div>
     <button class="create-btn" (click)="addBot()">
-        <span class="material-icons">add</span> Add Bot
+        <span class="material-icons">add</span> Novo Bot
     </button>
 </div>
 <div class="bot-list-container">
 <div class="bot-list">
     @for (bot of bots; track bot.id) {
-        <div class="bot-card">
-        <img [src]="" alt="Bot Image" class="bot-image">
-        <div class="bot-info">
-            <h4>{{ bot.username }}</h4>
-            <div class="status-switch">
-            <label class="switch">
-                <input type="checkbox" (change)="online(bot.id)">
-                <span class="slider"></span>
-            </label>
+        <div class="bot-card" (click)="handleBot(bot)" [ngClass]="{'bot-card-active': bot==this.targetBot}">
+            <div class="bot-icon-container">
+                <span class="material-icons bot-icon">smart_toy</span> <!-- Ícone do bot -->
             </div>
-            <div class="bar health-bar">
-            <div class="fill" [style.width.%]="bot.health" [style.background]="bot.health > 50 ? '#4CAF50' : '#FF5722'"></div>
-            </div>
-            <div class="bar hunger-bar">
-            <div class="fill" [style.width.%]="bot.hunger" [style.background]="bot.hunger > 50 ? '#FFD700' : '#FF5722'"></div>
+            <div class="bot-info">
+                <h4>{{ bot.username }}</h4>
+                <div class="status-switch">
+                    <label class="switch">
+                        <input type="checkbox" (change)="handleBotStatus(bot.id, $event)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="bar health-bar">
+                    <div class="fill" [style.width.%]="bot.health" [style.background]="bot.health > 50 ? '#4CAF50' : '#FF5722'"></div>
+                </div>
+                <div class="bar hunger-bar">
+                    <div class="fill" [style.width.%]="bot.hunger" [style.background]="bot.hunger > 50 ? '#FFD700' : '#FF5722'"></div>
+                </div>
             </div>
         </div>
-        </div>
+        
     }
 </div>
 </div>  
 
-<div class="script-grid">
-    <div class="script-card" *ngFor="let script of scripts">
-        <div class="card-header">
-            <h3>{{ script.title }}</h3>
-            <span class="status-badge" [ngClass]="{ 'active': script.running, 'inactive': !script.running }">
-                {{ script.running ? 'Running' : 'Stopped' }}
-            </span>
-        </div>
-        <div class="card-content">
-            <p>{{ script.description }}</p>
-        </div>
+@if(this.targetBot!=null){
+    <div class="script-grid">
+        @for (script of scripts; track $index) {
+            <div class="script-card" (click)="executeAction(script)">
+                <div class="card-header">
+                    <h3>{{ script.title }}</h3>
+                </div>
+                <div class="card-content">
+                    <p>{{ script.description }}</p>
+                </div>
+            </div>
+        }
     </div>
-</div>
+}
   

@@ -3,14 +3,14 @@
       <span class="material-icons search-icon">search</span>
       <input 
         type="text" 
-        placeholder="Search connections..." 
+        placeholder="Procurar Conexões..." 
         [(ngModel)]="searchQuery"
         class="search-input"
       >
     </div>
     <button class="create-btn" (click)="openCreateModal()">
       <span class="material-icons">add</span>
-      New Connection
+      Nova Conexão
     </button>
   </div>
   
@@ -19,7 +19,7 @@
       <div class="connection-card" (click)="openConnection(connection)">
         <div class="card-header">
           <span class="material-icons connection-icon">api</span>
-          <div class="status-badge">online</div>
+          <div class="status-badge" style="color:greenyellow">online</div>
         </div>
         <div class="card-content">
           <h3>{{connection.host}}</h3>
@@ -49,11 +49,11 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Endereço:</label>
-            <input type="text" style="max-width: 20rem;" ([(ngModel)]="newConnectionHost") placeholder="Enter connection name">
+            <input type="text" style="max-width: 20rem;" [(ngModel)]="this.newConnectionHost" placeholder="Enter connection name">
           </div>
           <div class="form-group">
             <label>Endereço:</label>
-            <input type="text" style="max-width: 20rem;" ([(ngModel)]="newConnectionPort") placeholder="Enter connection name">
+            <input type="text" style="max-width: 20rem;" [(ngModel)]="this.newConnectionPort" placeholder="Enter connection name">
           </div>
         </div>
         <div class="modal-footer">

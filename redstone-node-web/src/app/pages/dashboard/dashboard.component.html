@@ -5,10 +5,10 @@
       <button class="menu-toggle" (click)="toggleMenu()">
         <span class="material-icons">menu</span>
       </button>
-      <h1>Redstone Node</h1>
       <div class="header-actions">
-        <span class="material-icons">notifications</span>
-        <span class="material-icons">account_circle</span>
+        <div class="menu-header">
+          <img src="assets/logo.png" alt="Logo" class="logo">
+        </div>
       </div>
     </header>
   
@@ -17,7 +17,7 @@
       <!-- Side Menu -->
       <nav class="side-menu">
         <div class="menu-header">
-          <img src="assets/logo.png" alt="Logo" class="logo">
+          <h1>Redstone Node</h1>
         </div>
         <ul class="menu-items">
             @for (item of menuItems; track $index) {
