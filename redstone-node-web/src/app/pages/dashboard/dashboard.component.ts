@@ -3,6 +3,7 @@ import { ConnectionPageComponent } from "../connection-page/connection-page.comp
 import { CommandPageComponent } from "../command-page/command-page.component";
 import { HomePageComponent } from "../home-page/home-page.component";
 import { AboutComponent } from "../about-page/about.component";
+import { Connection } from '../../models/connection.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import { AboutComponent } from "../about-page/about.component";
 })
 export class DashboardComponent {
   pageNumber:number = 0;
+  targetConnection?:Connection;
   menuItems = [
     { name: 'Home', icon: 'home', route: '/dashboard' },
     { name: 'Conexões', icon: 'people', route: '/profile' },
@@ -31,6 +33,19 @@ export class DashboardComponent {
 
   changePage(item:any){
     this.pageNumber = this.menuItems.findIndex(_item => _item.name == item.name);
+  }
+
+  handleConnection(connection:Connection){
+
+    if(!connection){
+      alert('something went wrong...');
+      console.log(":(")
+    }
+
+    this.targetConnection = connection;
+    this.pageNumber = 2;
+    console.log(":)")
+
   }
 
 }

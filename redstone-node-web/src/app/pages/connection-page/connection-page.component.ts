@@ -1,15 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-
-interface Connection {
-  id: number;
-  name: string;
-  type: string;
-  status: 'active' | 'inactive' | 'pending';
-  lastSync: string;
-  icon: string;
-}
+import { Connection } from '../../models/connection.model';
 
 @Component({
   selector: 'app-connection-page',
@@ -19,46 +11,45 @@ interface Connection {
 })
 export class ConnectionPageComponent {
 
+  constructor (private http:HttpClient) {}
+
   searchQuery = '';
   showModal = false;
+  newConnectionHost:string = '';
+  newConnectionPort:string = '';
+
+  @Output()
+  connectionEvent:EventEmitter<Connection> = new EventEmitter<Connection>();
   
   connections: Connection[] = [
-    {
-      id: 1,
-      name: 'Production Database',
-      type: 'PostgreSQL Database',
-      status: 'active',
-      lastSync: '5 minutes ago',
-      icon: 'storage'
-    },
-    {
-      id: 2,
-      name: 'API Gateway',
-      type: 'REST API',
-      status: 'active',
-      lastSync: '1 hour ago',
-      icon: 'api'
-    },
-    {
-      id: 3,
-      name: 'Backup Storage',
-      type: 'Cloud Storage',
-      status: 'inactive',
-      lastSync: '1 day ago',
-      icon: 'cloud'
-    },
-    {
-      id: 4,
-      name: 'Message Queue',
-      type: 'RabbitMQ',
-      status: 'pending',
-      lastSync: '30 minutes ago',
-      icon: 'queue'
-    }
   ];
+
+  async ngOnInit(){
+    await this.getAllConnections();
+  }
 
   openCreateModal() {
     this.showModal = true;
+  }
+  
+  async createConnection(){
+    const newConnection = {
+      host:this.newConnectionHost,
+      port:this.newConnectionPort
+    }
+
+    await this.http.post("http://localhost:3000/connection/create", newConnection).subscribe((response) => {});
+
+  }
+
+  async getAllConnections(){
+    await this.http.get("http://localhost:3000/connection/getAll").subscribe((response) => {
+      this.connections = response as Connection[];
+    });
+  }
+
+  openConnection(connection:Connection){
+    this.connectionEvent.emit(connection);
   }
 
   closeModal() {

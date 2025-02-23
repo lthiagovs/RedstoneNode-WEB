@@ -36,10 +36,10 @@
             <app-home-page></app-home-page>
           }
           @case (1) {
-            <app-connection-page></app-connection-page>
+            <app-connection-page (connectionEvent)="handleConnection($event)"></app-connection-page>
           }
           @case (2) {
-            <app-command-page></app-command-page>
+            <app-command-page [targetConnection]="this.targetConnection"></app-command-page>
           }
           @case (3) {
             <app-about></app-about>

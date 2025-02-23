@@ -1,4 +1,3 @@
-<!-- Search and Action Bar -->
 <div class="action-bar">
     <div class="search-container">
       <span class="material-icons search-icon">search</span>
@@ -15,21 +14,16 @@
     </button>
   </div>
   
-  <!-- Connection Grid -->
   <div class="connection-grid">
     @for (connection of connections; track connection.id) {
-      <div class="connection-card">
+      <div class="connection-card" (click)="openConnection(connection)">
         <div class="card-header">
-          <span class="material-icons connection-icon">{{connection.icon}}</span>
-          <div class="status-badge">{{connection.status}}</div>
+          <span class="material-icons connection-icon">api</span>
+          <div class="status-badge">online</div>
         </div>
         <div class="card-content">
-          <h3>{{connection.name}}</h3>
-          <p class="type">{{connection.type}}</p>
-          <p class="sync-info">
-            <span class="material-icons">sync</span>
-            Last synced: {{connection.lastSync}}
-          </p>
+          <h3>{{connection.host}}</h3>
+          <p class="type">{{connection.port}}</p>
         </div>
         <div class="card-actions">
           <button class="action-btn">
@@ -43,38 +37,28 @@
     }
   </div>
   
-  <!-- Create Connection Modal -->
   @if (showModal) {
     <div class="modal-overlay" (click)="closeModal()">
       <div class="modal-content" (click)="$event.stopPropagation()">
         <div class="modal-header">
-          <h2>Create New Connection</h2>
+          <h2>Criar Nova Conexão</h2>
           <button class="close-btn" (click)="closeModal()">
             <span class="material-icons">close</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Connection Name</label>
-            <input type="text" placeholder="Enter connection name">
+            <label>Endereço:</label>
+            <input type="text" style="max-width: 20rem;" ([(ngModel)]="newConnectionHost") placeholder="Enter connection name">
           </div>
           <div class="form-group">
-            <label>Connection Type</label>
-            <select>
-              <option>Database</option>
-              <option>API</option>
-              <option>File System</option>
-              <option>Cloud Storage</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Connection URL</label>
-            <input type="text" placeholder="Enter connection URL">
+            <label>Endereço:</label>
+            <input type="text" style="max-width: 20rem;" ([(ngModel)]="newConnectionPort") placeholder="Enter connection name">
           </div>
         </div>
         <div class="modal-footer">
-          <button class="secondary-btn" (click)="closeModal()">Cancel</button>
-          <button class="primary-btn">Create Connection</button>
+          <button class="secondary-btn" (click)="closeModal()">Cancelar</button>
+          <button class="primary-btn" (click)="createConnection()" >Criar Conexão</button>
         </div>
       </div>
     </div>

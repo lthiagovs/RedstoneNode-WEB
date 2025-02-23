@@ -1,3 +1,4 @@
+<!-- Barra de Ação -->
 <div class="action-bar">
     <div class="search-container">
         <span class="search-icon material-icons">search</span>
@@ -7,22 +8,31 @@
         <span class="material-icons">add</span> Add Bot
     </button>
 </div>
-
-<!-- Lista de Bots -->
+<div class="bot-list-container">
 <div class="bot-list">
-    <div class="bot-card" *ngFor="let bot of bots">
-        <h3>{{ bot.name }}</h3>
-        <div class="bot-status">
-            <p><strong>Health:</strong> {{ bot.health }}%</p>
-            <p><strong>Hunger:</strong> {{ bot.hunger }}%</p>
+    @for (bot of bots; track bot.id) {
+        <div class="bot-card">
+        <img [src]="" alt="Bot Image" class="bot-image">
+        <div class="bot-info">
+            <h4>{{ bot.username }}</h4>
+            <div class="status-switch">
+            <label class="switch">
+                <input type="checkbox" (change)="online(bot.id)">
+                <span class="slider"></span>
+            </label>
+            </div>
+            <div class="bar health-bar">
+            <div class="fill" [style.width.%]="bot.health" [style.background]="bot.health > 50 ? '#4CAF50' : '#FF5722'"></div>
+            </div>
+            <div class="bar hunger-bar">
+            <div class="fill" [style.width.%]="bot.hunger" [style.background]="bot.hunger > 50 ? '#FFD700' : '#FF5722'"></div>
+            </div>
         </div>
-        <button class="toggle-btn" (click)="toggleBot(bot)">
-            <span class="material-icons">{{ bot.active ? 'toggle_on' : 'toggle_off' }}</span>
-        </button>
-    </div>
+        </div>
+    }
 </div>
+</div>  
 
-<!-- Grid de Scripts -->
 <div class="script-grid">
     <div class="script-card" *ngFor="let script of scripts">
         <div class="card-header">
@@ -36,3 +46,4 @@
         </div>
     </div>
 </div>
+  

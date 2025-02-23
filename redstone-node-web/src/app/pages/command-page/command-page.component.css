@@ -1,6 +1,12 @@
-/* Animação geral */
 * {
     transition: all 0.3s ease-in-out;
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1e1e1e;
+}
+
+hr{
+    color: #444;
+    background-color: #444;
 }
 
 /* Barra de Ação */
@@ -9,24 +15,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px;
-    background: #282828;
+    background: #1e1e1e;
     color: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Campo de Pesquisa */
 .search-container {
     display: flex;
     align-items: center;
-    background: #383838;
-    padding: 8px;
-    border-radius: 8px;
-}
-
-.search-icon {
-    color: white;
-    margin-right: 8px;
 }
 
 .search-input {
@@ -37,13 +34,7 @@
     padding: 4px;
 }
 
-.search-input:focus {
-    background: #444;
-    border-radius: 8px;
-    padding: 6px;
-}
-
-/* Botão de Adicionar Bot */
+/* Botão Adicionar Bot */
 .create-btn {
     display: flex;
     align-items: center;
@@ -54,7 +45,6 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .create-btn:hover {
@@ -63,88 +53,156 @@
 }
 
 /* Lista de Bots */
+/* Remova todos os estilos anteriores da .bot-list e .bot-card */
+
 .bot-list {
     display: flex;
-    gap: 16px;
-    padding: 16px 0;
-    overflow-x: auto;
-    white-space: nowrap;
+    gap: 10px;
+    overflow-x: scroll;
+    margin: 0;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .bot-card {
-    background: #2d2d2d;
-    padding: 16px;
-    border-radius: 12px;
-    min-width: 220px;
-    text-align: center;
-    color: white;
-    border: 1px solid #444;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex: 0 0 150px;
     position: relative;
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    transition: all 0.3s ease;
 }
 
 .bot-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-}
-
-.bot-status p {
-    margin: 6px 0;
-}
-
-/* Botão de ligar/desligar bots */
-.toggle-btn {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: transparent;
-    border: none;
     cursor: pointer;
-    font-size: 28px;
-    color: #4CAF50;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+    border-color: #4CAF50;
 }
 
-.toggle-btn:hover {
-    transform: scale(1.1);
+.bot-list > * {
+    float: left;
+    white-space: normal;
 }
 
-.toggle-btn .material-icons {
-    font-size: 32px;
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+ }
+ 
+ ::-webkit-scrollbar-track {  
+    background: #1e1e1e;
+    border-radius: 4px;
+ }
+ 
+ ::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+    border: 2px solid #1e1e1e;
+ }
+ 
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+ }
+
+.bot-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+/* Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+/* Barras de Vida e Fome */
+.bar {
+    width: 100%;
+    height: 8px;
+    background: #444;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.fill {
+    height: 100%;
+    transition: width 0.3s;
 }
 
 /* Grid de Scripts */
 .script-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
     margin-top: 16px;
 }
 
 .script-card {
     background: #222;
-    padding: 16px;
-    border-radius: 12px;
+    padding: 8px;
+    border-radius: 8px;
     color: white;
     border: 1px solid #444;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 .script-card:hover {
     transform: scale(1.05);
 }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
 .status-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 10px;
     text-transform: capitalize;
 }
 
