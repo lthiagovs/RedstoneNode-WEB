@@ -1,0 +1,61 @@
+.about-section {
+    padding: 24px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    color: white;
+  
+    h2 {
+      margin-bottom: 16px;
+      color: #FF3333;
+    }
+  
+    p {
+      margin-bottom: 16px;
+      color: #b3b3b3;
+    }
+  
+    .card-container {
+      display: flex;
+      gap: 16px;
+    }
+  
+    .card {
+      background: #2d2d2d;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+  
+      .card-header {
+        background: #333;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+  
+      .card-body {
+        padding: 16px;
+  
+        p {
+          margin-bottom: 12px;
+        }
+  
+        .primary-btn {
+          background: #FF3333;
+          color: white;
+          padding: 8px 16px;
+          border-radius: 4px;
+          text-align: center;
+          display: block;
+          text-decoration: none;
+        }
+  
+        .primary-btn:hover {
+          background: #ff4444;
+        }
+      }
+    }
+  }
+  
